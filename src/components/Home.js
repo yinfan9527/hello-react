@@ -7,8 +7,15 @@ export default class Home extends Component {
         super(props);
         // this.age = this.props.age;
         this.state = {
-            age : props.age
+            age : props.age,
+            status : 0,
+            homeLink : props.defaultValue,
         }
+        setTimeout(() => {
+            this.setState({
+                status : 1,
+            })
+        }, 3000)
     };
 
     onAddAgeClick(){
@@ -19,12 +26,25 @@ export default class Home extends Component {
         console.log(this);
     }
 
+    handleGreet(){
+        this.props.greet(this.state.age);
+    }
+
+    changeLick(){
+        this.props.changeLink(this.state.homeLink);
+    }
+
+    onChangeValue(e){
+        this.setState({
+            homeLink: e.target.value
+        });
+    }
+
     render() {
         return ( 
             <div className = "container" >
                 <div className = "row" >
                     <div className = "col-xs-1 col-xs-offset-11" >
-                        <div>your name is {this.props.name}, your age is {this.state.age}</div>
                         <div>
                             <h4>Hobbies</h4>
                             <ul>
@@ -34,10 +54,17 @@ export default class Home extends Component {
                         <div>
                             {this.props.children}
                         </div>
+                        <div>your name is {this.props.name}, your age is {this.state.age}</div>
+                        <p>Status: {this.state.status}</p>
                         <div>
                             <button onClick={this.onAddAgeClick.bind(this)} className="btn btn-primary">Add My Age</button>
                             <button onClick={() => {this.onAddAgeClick()}} className="btn btn-primary">Add My Age</button>
                         </div>
+                        <hr/>
+                        <button onClick={() => {this.handleGreet()}} className="btn btn-success" >Greet</button>
+                        <hr />
+                        <input type="text" defaultValue={this.props.defaultValue} onChange={(e)=>{this.onChangeValue(e)}}></input>
+                        <button onClick={() => {this.changeLick()}} className="btn btn-warning">Change Link</button>
                     </div> 
                 </div> 
             </div>
@@ -48,5 +75,7 @@ export default class Home extends Component {
 Home.propTypes = {
     name: PropTypes.string,
     age: PropTypes.number,
-    user: PropTypes.object
+    user: PropTypes.object,
+    greet: PropTypes.func,
+    changeLink: PropTypes.func,
 }
