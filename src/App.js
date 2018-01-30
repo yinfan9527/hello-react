@@ -5,20 +5,24 @@ import Home from './components/Home';
 
 class App extends Component {
     render() {
+        const user = {
+            name : "qiq",
+            hobbies : ["sports", "reading"]
+        }
         return ( 
-            <div className = "contrainer" >
+            <div className = "container" >
                 <div className = "row" >
-                    <div className = "col-xs-1 col-xs-offset-11" >
+                    <div className = "col-xs-1" >
                         <h1 > Hello！！！ </h1> 
                     </div> 
                 </div>
                 <div className = "row" >
-                    <div className = "col-xs-1 col-xs-offset-11" >
-                        <Home/>
+                    <div className = "col-xs-1" >
+                        <Home name="Hoho" age={12} user={user} />
                     </div> 
                 </div>
                 <div className = "row" >
-                    <div className = "col-xs-1 col-xs-offset-11" >
+                    <div className = "col-xs-1" >
                         <Header/>
                     </div> 
                 </div> 
