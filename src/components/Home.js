@@ -16,6 +16,7 @@ export default class Home extends Component {
                 status : 1,
             })
         }, 3000)
+        console.log("Component constructor ");
     };
 
     onAddAgeClick(){
@@ -40,7 +41,44 @@ export default class Home extends Component {
         });
     }
 
+    componentWillMount(){
+        console.log("Component will mount ");
+    }
+
+    componentDidMount(){
+        console.log("Component did mount");
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("Component will receive props", nextProps);
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        console.log("Component should update" , nextProps, nextState);
+        if(nextState.status === 1){
+            return false;
+        }
+        return true;
+    }
+
+    componentWillUpdate(nextProps, nextState){
+        console.log("Component will update ", nextProps, nextState);
+    }
+
+    componentDidUpdate(preProps, preState){
+        console.log("Component did update", preProps, preState);
+    }
+
+    componentWillUnmount(){
+        console.log("Component will unmount");
+    }
+
+    componentDidCatch(){
+        console.log("Component did catch");
+    }
+
     render() {
+        console.log("Component render ");
         return ( 
             <div className = "container" >
                 <div className = "row" >

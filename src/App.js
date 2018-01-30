@@ -8,7 +8,8 @@ class App extends Component {
     constructor(){
         super();
         this.state = {
-            homeLink:"Header Link !"
+            homeLink:"Header Link !",
+            homeMounted:true,
         }
     }
 
@@ -22,11 +23,31 @@ class App extends Component {
         })
     }
 
+    onChangeMountHome(){
+        this.setState({
+            homeMounted: !this.state.homeMounted,
+        })
+    }
+
     render() {
         const user = {
             name : "qiq",
             hobbies : ["sports", "reading"]
         }
+
+        let homeComp = "";
+        if(this.state.homeMounted){
+            homeComp = (<Home name="Hoho" age={12} 
+                user={user} 
+                greet={this.onGreet} 
+                changeLink={this.onChangeLinkName.bind(this)}
+                defaultValue={this.state.homeLink}
+                >
+                <p>I'm child</p>
+        </Home>);
+        }
+
+
         return ( 
             <div className = "container" >
                 <div className = "row" >
@@ -41,16 +62,11 @@ class App extends Component {
                 </div> 
                 <div className = "row" >
                     <div className = "col-xs-1" >
-                        <Home name="Hoho" age={12} 
-                            user={user} 
-                            greet={this.onGreet} 
-                            changeLink={this.onChangeLinkName.bind(this)}
-                            defaultValue={this.state.homeLink}
-                            >
-                            <p>I'm child</p>
-                        </Home>
+                        {homeComp}
                     </div> 
                 </div>
+                <hr/>
+                <button onClick={()=>{this.onChangeMountHome()}} className="btn btn-danger">Home (Un)Mount</button>
             </div>
         );
     }
