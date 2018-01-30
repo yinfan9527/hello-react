@@ -15,6 +15,9 @@ export default class Home extends Component {
                                 {this.props.user.hobbies.map((hobby,i) => <li key={i}>{hobby}</li>)}
                             </ul>
                         </div>
+                        <div>
+                            {this.props.children}
+                        </div>
                     </div> 
                 </div> 
             </div>
